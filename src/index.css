@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Babylonica&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Righteous&family=Roboto+Mono:wght@400;500;600;700&display=swap");
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+ 
+}
+
+
+.active{
+  /* background-color: #537FE7; */
+  border-radius: 20rem;
+  color: #000;
+}
+.hoverClass{
+  background-color: #537FE7;
+  border-radius: 20rem;
+  color: #828286;
+}
+#blob{
+  background: linear-gradient(to right, #fcffbb,rgb(255, 246, 153));
+  position: absolute;
+  overflow-x: hidden;
+  height: 500px;
+  aspect-ratio: 1;
+  right: 0;
+  top: 0;
+  translate: -50% -50%;
+  border-radius: 50%;
+  animation: rotate 10s infinite;
+  filter: blur(100px);
+  z-index: -67;
+}
+
+@keyframes rotate{
+  from{
+    rotate:0deg;
+  }
+  50%{
+    scale: 1 1.3;
+  }
+  to{
+    rotate: 360deg;
+  }
+}
+@media (max-width: 768px) {
+  #blob{
+    left: 0;
+  }
+  @keyframes rotate{
+    from{
+      rotate:0deg;
+    }
+    50%{
+      scale: 1  ;
+    }
+    to{
+      rotate: 360deg;
+    }
+  }
+}
