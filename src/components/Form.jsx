@@ -422,7 +422,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="form-row z-20">
+                <div className="form-row z-23">
                   <label>Date of Birth:</label>
                   <DatePicker
                     selected={dob}
