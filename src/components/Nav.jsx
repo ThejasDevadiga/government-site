@@ -25,11 +25,10 @@ export default function Nav() {
 
   const [navigation, setNavigation] = useState([
     { name: "ಮುಖಪುಟ", href: "/", current: false },
-    // { name: "ನಮ್ಮಬಗ್ಗೆ", href: "/about", current: false },
     { name: "ಧ್ಯೇಯೋದ್ದೇಶಗಳು", href: "/services", current: false },
     { name: "ಇತ್ತೀಚಿನ ವರದಿಗಳು", href: "/reports", current: false },
     {name: "ಅಂಗರಚನೆ", href: "/angarachane",current: false },
-    {name:"ಸದಸ್ಯತ್ವ", href: "/google_form", current: false },
+    {name:"ಸದಸ್ಯತ್ವ", href: "/form", current: false },
     { name: "ಸಂಪರ್ಕಿಸಿ", href: "/contact", current: false },
   ]);
 

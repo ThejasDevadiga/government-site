@@ -79,7 +79,7 @@ function Contact() {
               </div>
               <button
                 type="submit"
-                class="py-3 px-5 text-sm font-medium text-center text-black rounded-lg bg-yellow sm:w-fit hover:bg-lightyellow border-2 border-yellow duration-300 y-600   "
+                class="py-3 px-5 rounded-full text-sm font-medium text-center text-black  bg-yellow sm:w-fit hover:bg-lightyellow  border-yellow duration-300 y-600   "
               >
                 Send message
               </button>
