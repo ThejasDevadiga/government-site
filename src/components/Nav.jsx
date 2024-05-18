@@ -22,12 +22,13 @@ export default function Nav() {
       });
     }
   }, []);
-
+  
   const [navigation, setNavigation] = useState([
     { name: "ಮುಖಪುಟ", href: "/", current: false },
     { name: "ಧ್ಯೇಯೋದ್ದೇಶಗಳು", href: "/services", current: false },
     { name: "ಇತ್ತೀಚಿನ ವರದಿಗಳು", href: "/reports", current: false },
     {name: "ಅಂಗರಚನೆ", href: "/angarachane",current: false },
+    {name: "ಗ್ಯಾಲರಿ", href: "/gallery",current: false },
     {name:"ಸದಸ್ಯತ್ವ", href: "/form", current: false },
     { name: "ಸಂಪರ್ಕಿಸಿ", href: "/contact", current: false },
   ]);
