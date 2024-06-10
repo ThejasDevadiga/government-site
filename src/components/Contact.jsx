@@ -7,7 +7,7 @@ function Contact() {
     <div className="  px-3 md:px-20 lg:px-32 min-h-screen  md:my-0 flex justify-center items-center flex-col md:flex-row">
       <iframe
         className="rounded-2xl md:h-[80vh] min-h-[30vh] md:mt-0  md:mr-6 mt-[10rem]"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.2911281397355!2d76.702648!3d12.296170799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baf71d8e34aaac9%3A0x52e36c9e81d1df89!2s276%2C%20T%20Narsipura%20Rd%2C%201st%20Stage%2C%20Nandini%20Layout%2C%20Nadanahalli%2C%20Mysuru%2C%20Karnataka%20570028!5e0!3m2!1sen!2sin!4v1717998569465!5m2!1sen!2sin"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.2911281397355!2d76.702648!3d12.296170799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baf71d8e34aaac9%3A0x52e36c9e81d1df89!2s276%2C%20T%20Narsipura%20Rd%2C%201st%20Stage%2C%20Nandini%20Layout%2C%20Nadanahalli%2C%20Mysuru%2C%20Karnataka%20570028!5e0!3m2!1sen!2sin!4v1717998569465!5m2!1sen!2sinhttps://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3898.244982230851!2d76.70348737506522!3d12.299282087957693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDE3JzU3LjQiTiA3NsKwNDInMjEuOCJF!5e0!3m2!1sen!2sin!4v1718001514350!5m2!1sen!2sin"
         width="100%"
        
         style={{ border: 0 }}
