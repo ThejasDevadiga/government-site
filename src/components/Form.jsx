@@ -500,7 +500,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="form-row z-23">
+                <div className="form-row z-50">
                   <label>Date of Birth:</label>
                   <DatePicker
                     selected={dob}
@@ -603,7 +603,7 @@ function App() {
                       <i class="zmdi zmdi-chevron-down"></i>
                     </span>
                   </div>
-                  <div class="form-row form-row-2 z-20">
+                  <div class="form-row form-row-2 z-40">
                     <label for="gender">Joining Date:</label>
                     <DatePicker
                       selected={joining}
