@@ -1,11 +1,11 @@
 import React from "react";
-import { bg } from "../assets";
+import { logo } from "../assets";
 function Reports() {
   return (
     <>
       <div className="min-h-screen  p-3  md:px-20 lg:px-32 ">
         <img
-          src={bg}
+          src={logo}
           alt=""
           className="absolute -z-10 top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] opacity-5"
         />
