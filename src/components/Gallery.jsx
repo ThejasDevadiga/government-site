@@ -1,5 +1,7 @@
 import "photoswipe/dist/photoswipe.css";
 import { Gallery, Item } from "react-photoswipe-gallery";
+import APIStandards from "../utils/API_standards";
+import communication_service from "../services/communication_service";
 import React from "react";
 import {
   gal1,
@@ -13,9 +15,29 @@ import {
   gal9,
 } from "../assets/index";
 
-const images = [gal2, gal3, gal4, gal5, gal6, gal7, gal8, gal9, gal1];
+const [loading , setLoading ] = useState(false)
+const [images,setIMages] = useState([])
+useEffect(() => {
+const getEvents = async() => {
+  setLoading(true);
+ await communication_service
+    .get(APIStandards.USER.GET_EVENTS_DATA,{}, { })
+    .then((data) => {
+      setIMages(data.data)
+      setLoading(false);
+    })
+    .catch((ex) => {
+     console.log(ex);
+      setLoading(false);
+    });
+};
+getEvents();
+}, [])
 
 const MyGallery = () => (
+
+
+  
   <Gallery>
     <div className="description p-12 text-center text-xl">
       <p>

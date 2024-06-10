@@ -3,6 +3,8 @@ import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import membershipFormPDF from "./membershipform.pdf";
+import APIStandards from "../utils/API_standards";
+import communication_service from "../services/communication_service";
 
 function App() {
   const [dob, setDOB] = useState(null);
@@ -10,6 +12,8 @@ function App() {
 
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [taluks, setTaluks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState([]);
 
   const taluksData = {
     Bagalkote: [
@@ -334,6 +338,32 @@ function App() {
     alert("Membership form has been downloaded.");
   };
 
+ const uploadData = async (data) => {
+    console.log(data);
+    await communication_service
+      .get(APIStandards.USER.GET_EVENTS_DATA, data, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data,
+        },
+      })
+      .then((data) => {
+        setResult(data.data);
+        alert("data sent successfully !!");
+        setLoading(false);
+      })
+      .catch((ex) => {
+        console.log(ex);
+        alert("Please try after some times!");
+        setLoading(false);
+      });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    uploadData(data);
+  };
+
   return (
     <>
       <div className=" p-3  md:px-20 lg:px-32 ">
@@ -381,24 +411,10 @@ function App() {
       <body class="form-v10" ref={formRef}>
         <div class="page-content">
           <div class="form-v10-content">
-            <form class="form-detail" action="#" method="post" id="myform">
+            <form class="form-detail" action="#" method="post" id="myform" onSubmit={handleSubmit}>
               <div class="form-left">
                 <h2>General Infomation</h2>
                 <div class="form-row">
-                  {/* <select name="title">
-                    <option value="" disabled selected>
-                      Choose Prefix
-                    </option>
-                    <option class="option" value="businessman">
-                      Mr.
-                    </option>
-                    <option class="option" value="reporter">
-                      Ms.
-                    </option>
-                    <option class="option" value="secretary">
-                      Mrs.
-                    </option>
-                  </select> */}
                   <span class="select-btn">
                     <i class="zmdi zmdi-chevron-down"></i>
                   </span>
@@ -409,7 +425,7 @@ function App() {
 
                     <input
                       type="text"
-                      name="first_name"
+                      name="fname"
                       id="first_name"
                       class="input-text"
                       placeholder="First Name"
@@ -421,7 +437,7 @@ function App() {
 
                     <input
                       type="text"
-                      name="last_name"
+                      name="lname"
                       id="last_name"
                       class="input-text"
                       placeholder="Last Name"
@@ -655,6 +671,24 @@ function App() {
                     <i class="zmdi zmdi-chevron-down"></i>
                   </span>
                 </div>
+                <div className="form-row">
+                <label for="region">Division</label>
+                <select name="region" id="division" required>
+                  <option value="" disabled selected>
+                    Select division
+                  </option>
+                  <option value="belgavi">Belgavi</option>
+                  <option value="bangalore">Bengaluru</option>
+                  <option value="mysuru">Mysuru</option>
+                  <option value="kalburgi">Kalburgi</option>
+                </select>
+                <span className="select-btn">
+                  <i className="zmdi zmdi-chevron-down"></i>
+                </span>
+              </div>
+
+
+
 
                 <div class="form-row">
                   <input
