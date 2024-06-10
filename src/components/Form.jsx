@@ -341,12 +341,13 @@ function App() {
  const uploadData = async (data) => {
     console.log(data);
     await communication_service
-      .get(APIStandards.USER.GET_EVENTS_DATA, data, {
+      .post(APIStandards.USER.SET_MEMBER_DATA, data, {
         headers: {
           "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data,
         },
       })
       .then((data) => {
+        console.log(data);
         setResult(data.data);
         alert("data sent successfully !!");
         setLoading(false);
