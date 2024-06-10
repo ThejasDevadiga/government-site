@@ -1,7 +1,8 @@
 import "../form_style.css";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import membershipFormPDF from "./membershipform.pdf";
 
 function App() {
   const [dob, setDOB] = useState(null);
@@ -314,16 +315,77 @@ function App() {
 
   const districts = Object.keys(taluksData);
 
+  const formRef = useRef(null);
+
+  const scrollToForm = () => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const downloadPDF = (pdfFile, filename) => {
+    const link = document.createElement("a");
+    link.href = pdfFile;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    alert("Membership form has been downloaded.");
+  };
+
   return (
     <>
-      <body class="form-v10">
+      <div className=" p-3  md:px-20 lg:px-32 ">
+        <h1 className="text-3xl my-3  font-semibold text-green">ಸದಸ್ಯತ್ವ</h1>
+        <p className=" lg:text-xl md:text-2xl md:leading-8">
+          ಕರ್ನಾಟಕ ರಾಜ್ಯ ಭೂಮಾಪನ ಕಂದಾಯವ್ಯವಸ್ಥೆ ಹಾಗೂ ಭೂಧಾಖಲೆಯ ಇಲಾಖೆಯ ಪರವಾನಗಿ
+          ಭೂಮಾಪಕರ ಕ್ಷೇಮಾಭಿವೃಧ್ದಿ ಸಂಘದ ಸದಸ್ಯರಾಗುವ ಮೂಲಕ ಸಂಘವನ್ನು ಪ್ರೋತ್ಸಾಹಿಸಿ
+          ಬೆಳೆಸಿ ವಿಶೇಷ ಹಕ್ಕುಗಳು & ಸ್ಥಾನಮಾನಗಳನ್ನು ಹೊಂದುವುದಲ್ಲದೇ ರಾಜ್ಯಾದ್ಯಂತ
+          ಪರವಾನಗಿ ಭೂಮಾಪಕರನ್ನು ಒಂದುಗೂಡಿಸಲು ಸಹಕಾರಿಯಾಗಬೇಕೆಂದು ಕೋರಿದೆ. ಸಂಘಕ್ಕೆ
+          ಸದಸ್ಯರಾಗುವುದರ ಲಾಭಗಳು.{" "}
+          <span className="">
+            <br /> 1. ಸಂಘದ ಚುನಾವಣೆಗಳಲ್ಲಿ ಮತ ಚಲಾಯಿಸುವ ಹಕ್ಕು ಹೊಂದಬಹುದು <br /> 2.
+            ಸಂಘದ ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ ಉಚಿತ ಪ್ರವೇಶವಿರುತ್ತದೆ.(ಆನ್ಲೈನ್ ಕಲಿಕೆಯ
+            ಕಾರ್ಯಕ್ರಮಗಳು, ಕೌಶಲ್ಯಾಭಿವೃಧ್ದಿ ಶಿಬಿರಗಳು, ಇತರೆ) <br />
+            3. ರಾಜ್ಯಮಟ್ಟದ ಕ್ರೀಡಾಕೂಟದಲ್ಲಿ ಭಾಗವಹಿಸುವುದು. <br /> 4. ರಾಜ್ಯಮಟ್ಟದ
+            ಪ್ರತಿಭಾ ಸ್ಪರ್ಧೆಗಳಲ್ಲಿ ಭಾಗವಹಿಸುವುದು...etc etc. <br />
+          </span>
+          ಸಂಘಕ್ಕೆ ಸದಸ್ಯರಾಗಲು ಸದಸ್ಯತ್ವ ಶುಲ್ಕ ೧೦೦೦ ರೂಗಳನ್ನು ಪಾವತಿಸಿ ಸದಸ್ಯತ್ವ
+          ಗುರುತಿನ ಚೀಟಿಗಳನ್ನು ಪಡೆಯುವ ಮೂಲಕ ಸೇರಬಹುದಾಗಿರುತ್ತದೆ.{" "}
+          <span className="">
+            <br /> ೧.{" "}
+            <a
+              onClick={scrollToForm}
+              className="cursor-pointer underline-offset-2 underline text-green  hover:text-lightgreen duration-200 font-semibold"
+            >
+              ಆನ್ಲೈನ್{" "}
+            </a>{" "}
+            ಮೂಲಕ ಸದಸ್ಯರಾಗಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ. <br />
+            ೨.{" "}
+            <a
+              onClick={() =>
+                downloadPDF(membershipFormPDF, "MembershipForm.pdf")
+              }
+              href=""
+              className="cursor-pointer underline-offset-2 underline text-green hover:text-lightgreen duration-200 font-semibold"
+            >
+              ಆಫ್ಲೈನ್
+            </a>{" "}
+            ಮೂಲಕ ಸದಸ್ಯರಾಗಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ. <br /> ೩.ಒಂದು ಗುಂಪು ಅಥವಾ
+            ಪ್ರತಿನಿಧಿಗಳ ಮೂಲಕ ಸದಸ್ಯತ್ವ ಪಡೆಯಲು ಸಹಾಯವಾಣಿಗೆ ಕರೆಮಾಡಿ.
+          </span>
+        </p>
+      </div>
+
+      <body class="form-v10" ref={formRef}>
         <div class="page-content">
           <div class="form-v10-content">
             <form class="form-detail" action="#" method="post" id="myform">
               <div class="form-left">
                 <h2>General Infomation</h2>
                 <div class="form-row">
-                  <select name="title">
+                  {/* <select name="title">
                     <option value="" disabled selected>
                       Choose Prefix
                     </option>
@@ -336,7 +398,7 @@ function App() {
                     <option class="option" value="secretary">
                       Mrs.
                     </option>
-                  </select>
+                  </select> */}
                   <span class="select-btn">
                     <i class="zmdi zmdi-chevron-down"></i>
                   </span>

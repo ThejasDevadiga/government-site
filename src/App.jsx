@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Form from "./components/Form";
 import Gallery from "./components/Gallery";
+import Reports from "./components/Reports";
 function App() {
   // useEffect(() => {
   //   const blob = document.getElementById("blob");
@@ -29,6 +30,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/reports" element={<Reports />}/>
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/form" element={<Form />} />
       </Routes>

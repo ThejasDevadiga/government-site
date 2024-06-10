@@ -1,16 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import AboutCard from "./AboutCard";
-import { bg } from "../assets";
+import { logo } from "../assets";
 
 function About() {
   return (
     <>
       <div className="min-h-screen  p-3 md:grid place-content-center md:px-20 lg:px-32 ">
         <img
-          src={bg}
+          src={logo}
           alt=""
-          className="absolute -z-10 top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] opacity-5"
+          className="absolute -z-10 top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] opacity-[4%]"
         />
         <div className="text-center">
           <h1 className="text-3xl my-3  font-semibold text-green">

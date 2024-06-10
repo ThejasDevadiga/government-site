@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import { bg } from "../assets";
+import { logo } from "../assets";
 import About from "./About";
 function Header() {
   return (
@@ -10,9 +10,9 @@ function Header() {
         <div className="m-5 flex flex-col justify-center items-center">
           <div className="flex justify-center items-center ">
             <img
-              src={bg}
+              src={logo}
               alt=""
-              className="h-48    drop-shadow-2xl overflow-hidden p-4 md:p-12 lg:p-0 z-30 lg:-z-0 absolute lg:static lg:rounded-3xl md:rounded-[6rem] rounded-[3rem] brightness-100 object-cover"
+              className="h-48    drop-shadow-2xl overflow-hidden p-4 md:p-12 lg:p-0 z-18 lg:-z-0 absolute lg:static lg:rounded-3xl md:rounded-[6rem] rounded-[3rem] brightness-100 object-cover"
             />
           </div>
           <div className="flex justify-center mt-24 items-center flex-col">
