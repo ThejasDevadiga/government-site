@@ -48,7 +48,7 @@ const MyGallery = () => {
                 <img
                   ref={ref}
                   onClick={open}
-                  src={image}
+                  src={"data:image/jpeg;base64"+image.photo}
                   alt={`Gallery Image ${index + 1}`}
                   className="w-full h-auto object-cover"
                 />
