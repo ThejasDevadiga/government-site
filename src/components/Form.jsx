@@ -457,6 +457,7 @@ function App() {
                       class="input-text"
                       placeholder="Aadhar Number"
                       required
+                      
                     />
                   </div>
                   <div class="form-row form-row-2">
