@@ -460,11 +460,11 @@ function App() {
                     />
                   </div>
                   <div class="form-row form-row-2">
-                    <label>Aadhar Copy:</label>
+                    <label>Aadhar Copy :</label>
 
                     <input
                       type="file"
-                      name="aadhar_cpy"
+                      name="aadhar_copy"
                       id="aadhar_copy"
                       class="input-text"
                       placeholder=""
