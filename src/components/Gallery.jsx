@@ -13,8 +13,8 @@ const MyGallery = () => {
       setLoading(true);
       try {
         const data = await communication_service.get(APIStandards.USER.GET_EVENTS_DATA, {}, {});
-        console.log(data.data)
-        setImages(data.data);
+        console.log(data.data['data'])
+        setImages(data.data['data']);
       } catch (ex) {
         console.log(ex);
       } finally {
