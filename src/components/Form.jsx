@@ -505,6 +505,7 @@ function App() {
                   <label>Date of Birth:</label>
                   <DatePicker
                     selected={dob}
+                    name="dob"
                     onChange={(date) => setDOB(date)}
                     dateFormat="dd/MM/yyyy" // Set the date format to day/month/year
                     required // Make the field required
@@ -608,6 +609,7 @@ function App() {
                     <label for="gender">Joining Date:</label>
                     <DatePicker
                       selected={joining}
+                      name="joining"
                       onChange={(date) => setJoining(date)}
                       dateFormat="dd/MM/yyyy"
                       required
@@ -679,7 +681,7 @@ function App() {
                     Select division
                   </option>
                   <option value="belgavi">Belgavi</option>
-                  <option value="bangalore">Bengaluru</option>
+                  <option value="bengaluru">Bengaluru</option>
                   <option value="mysuru">Mysuru</option>
                   <option value="kalburgi">Kalburgi</option>
                 </select>
@@ -740,7 +742,7 @@ function App() {
                 <div class="form-row">
                   <input
                     type="text"
-                    name="your_email"
+                    name="email"
                     id="your_email"
                     class="input-text"
                     required
