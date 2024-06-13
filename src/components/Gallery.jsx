@@ -45,7 +45,6 @@ const MyGallery = () => {
               width="1024"
               height="768"
             >
-              {({ ref, open }) => (
                 <img
                   ref={ref}
                   onClick={open}
@@ -53,7 +52,6 @@ const MyGallery = () => {
                   alt={`Gallery Image ${index + 1}`}
                   className="w-full h-auto object-cover"
                 />
-              )}
             </Item>
           ))}
         </div>
