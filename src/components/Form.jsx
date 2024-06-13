@@ -464,7 +464,7 @@ function App() {
 
                     <input
                       type="file"
-                      name="aadhar_cpy"
+                      name="aadhar_copy"
                       id="aadhar_copy"
                       class="input-text"
                       placeholder=""
