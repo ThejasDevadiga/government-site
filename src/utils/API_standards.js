@@ -1,5 +1,5 @@
 
-const PRODUCTION = "https://wellfare-thejasdevadigas-projects.vercel.app/api/"
+const PRODUCTION = "https://dev.karnatakalswelfare.org/api/"
 const DEVELOPMENT = "https://localhost:8000/api"
 const BASEURL = PRODUCTION
 const APIStandards =  {
