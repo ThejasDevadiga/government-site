@@ -7,7 +7,17 @@ import React, { useEffect, useState } from "react";
 const MyGallery = () => {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
+ const arrayBufferToBase64 = (buffer) => {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
 
+    for (let i = 0; i < len; i += 1024) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 1024));
+    }
+
+    return btoa(binary);
+  };
   useEffect(() => {
     const getEvents = async () => {
       setLoading(true);
@@ -39,12 +49,10 @@ const MyGallery = () => {
         <div className="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-4 gap-5 p-12">
           {images.map((image, index) =>
       { const data=image.photo
-          const uint8Array = new Uint8Array(data.img.data);
+           const base64String = arrayBufferToBase64(data.img.data);
 
          
-          const base64String = btoa(
-            String.fromCharCode(...uint8Array)
-          );
+                  
       return (
                 <img
                   src={`data:image/png;base64,${base64String}`}
