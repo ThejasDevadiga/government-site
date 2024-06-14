@@ -39,7 +39,7 @@ const MyGallery = () => {
         <div className="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-4 gap-5 p-12">
           {images.map((image, index) => (
                 <img
-                  src={URL.createObjectURL(image.photo['img'])}
+                  src={URL.createObjectURL(new Blob(image.photo['img'], {type: 'application/octet-binary' }))}
                   alt={`Gallery Image ${index + 1}`}
                   className="w-full h-auto object-cover"
                 />
