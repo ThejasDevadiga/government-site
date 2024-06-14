@@ -349,7 +349,7 @@ function App() {
       .then((data) => {
         console.log(data);
         setResult(data.data);
-        alert("data sent successfully !!");
+        alert(data.data['link');
         setLoading(false);
       })
       .catch((ex) => {
