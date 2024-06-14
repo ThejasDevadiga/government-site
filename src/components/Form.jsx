@@ -349,7 +349,7 @@ function App() {
       .then((data) => {
         console.log(data);
         setResult(data.data);
-        alert(data.data['link');
+        alert(data.data['link']);
         setLoading(false);
       })
       .catch((ex) => {
