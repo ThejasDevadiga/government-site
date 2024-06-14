@@ -37,9 +37,17 @@ const MyGallery = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 items-center sm:grid-cols-2 md:grid-cols-4 gap-5 p-12">
-          {images.map((image, index) => (
+          {images.map((image, index) =>
+          const data=image.photo
+          const uint8Array = new Uint8Array(data.img.data);
+
+         
+          const base64String = btoa(
+            String.fromCharCode(...uint8Array)
+          );
+      return (
                 <img
-                  src={URL.createObjectURL(new Blob(image.photo['img'], {type: 'application/octet-binary' }))}
+                  src={`data:image/png;base64,${base64String}`}
                   alt={`Gallery Image ${index + 1}`}
                   className="w-full h-auto object-cover"
                 />
