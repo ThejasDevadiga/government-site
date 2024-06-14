@@ -349,7 +349,9 @@ function App() {
       .then((data) => {
         console.log(data);
         setResult(data.data);
-        alert(data.data['link']);
+        
+        window.location.href = data.data['link'];
+
         setLoading(false);
       })
       .catch((ex) => {
