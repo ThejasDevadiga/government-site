@@ -310,7 +310,16 @@ function App() {
       "Kotturu",
     ],
   };
-
+  const onFileSelected = (event: any) => {
+    const target = event.target;
+    if (target.files && target.files[0]) {
+      const maxAllowedSize = 1 * 1024 * 1024;
+      if (target.files[0].size > maxAllowedSize) {
+        alert('Please select file <1MB ');
+        target.value = '';
+      }
+    }
+  };
   const handleDistrictChange = (event) => {
     const district = event.target.value;
     setSelectedDistrict(district);
@@ -469,6 +478,7 @@ function App() {
                       type="file"
                       name="aadhar_copy"
                       id="aadhar_copy"
+                      onChange={onFileSelected}
                       class="input-text"
                       placeholder=""
                       accept=".jpg, .jpeg, .png, .pdf"
@@ -760,6 +770,7 @@ function App() {
                     type="file"
                     name="photo_copy"
                     id="photo_copy"
+                    onChange={onFileSelected}
                     class="input-text"
                     placeholder=""
                     accept=".jpg, .jpeg, .png, .pdf"
