@@ -3,9 +3,45 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { logo } from "../assets";
 import About from "./About";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination,Autoplay } from "swiper/modules";
+import { udupi, comp, kundap, mlore } from "../assets";
+
+const banner = [
+  { src: udupi, alt: "Udupi" },
+  { src: comp, alt: "Comp" },
+  { src: kundap, alt: "kundap" },
+  { src: mlore, alt: "mlore" },
+];
+
 function Header() {
   return (
     <>
+      <div className="grid items-center">
+        <Swiper
+        centeredSlides={true}
+        
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+          modules={[Pagination, Autoplay]}
+          className="mySwiper grid items-center"
+        >
+          {banner.map((image, index) => (
+            <SwiperSlide key={index} className="flex justify-center items-center">
+              <img src={image.src} alt={image.alt} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
       <div className="h-screen mt-12 md:-mt-12 flex flex-col-reverse md:flex-row items-center px-3 md:px-32 justify-center">
         <div className="m-5 flex flex-col justify-center items-center">
           <div className="flex justify-center items-center ">

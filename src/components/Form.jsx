@@ -9,7 +9,6 @@ import communication_service from "../services/communication_service";
 function App() {
   const [dob, setDOB] = useState(null);
   const [joining, setJoining] = useState(null);
-
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [taluks, setTaluks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -310,16 +309,18 @@ function App() {
       "Kotturu",
     ],
   };
-  const onFileSelected = (event: any) => {
+
+  const onFileSelected = (event) => {
     const target = event.target;
     if (target.files && target.files[0]) {
       const maxAllowedSize = 1 * 1024 * 1024;
       if (target.files[0].size > maxAllowedSize) {
-        alert('Please select file <1MB ');
-        target.value = '';
+        alert("Please select file <1MB");
+        target.value = "";
       }
     }
   };
+
   const handleDistrictChange = (event) => {
     const district = event.target.value;
     setSelectedDistrict(district);
@@ -347,47 +348,48 @@ function App() {
     alert("Membership form has been downloaded.");
   };
 
- const uploadData = async (data) => {
-    console.log(data);
-    await communication_service
-      .post(APIStandards.USER.SET_MEMBER_DATA, data, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data,
-        },
-      })
-      .then((data) => {
-        console.log(data);
-        setResult(data.data);
-        
-        window.location.href = data.data['link'];
+  const uploadData = async (data) => {
+    try {
+      const response = await communication_service.post(
+        APIStandards.USER.SET_MEMBER_DATA,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+          },
+        }
+      );
+      console.log(response);
+      setResult(response.data);
 
-        setLoading(false);
-      })
-      .catch((ex) => {
-        console.log(ex);
-        alert("Please try after some times!");
-        setLoading(false);
-      });
+      window.location.href = response.data["link"];
+    } catch (ex) {
+      console.log(ex);
+      alert("Please try again later!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.target);
     uploadData(data);
   };
 
   return (
     <>
-      <div className=" p-3  md:px-20 lg:px-32 ">
-        <h1 className="text-3xl my-3  font-semibold text-green">ಸದಸ್ಯತ್ವ</h1>
-        <p className=" lg:text-xl md:text-2xl md:leading-8">
+      <div className="p-3 md:px-20 lg:px-32">
+        <h1 className="text-3xl my-3 font-semibold text-green">ಸದಸ್ಯತ್ವ</h1>
+        <p className="lg:text-xl md:text-2xl md:leading-8">
           ಕರ್ನಾಟಕ ರಾಜ್ಯ ಭೂಮಾಪನ ಕಂದಾಯವ್ಯವಸ್ಥೆ ಹಾಗೂ ಭೂಧಾಖಲೆಯ ಇಲಾಖೆಯ ಪರವಾನಗಿ
           ಭೂಮಾಪಕರ ಕ್ಷೇಮಾಭಿವೃಧ್ದಿ ಸಂಘದ ಸದಸ್ಯರಾಗುವ ಮೂಲಕ ಸಂಘವನ್ನು ಪ್ರೋತ್ಸಾಹಿಸಿ
           ಬೆಳೆಸಿ ವಿಶೇಷ ಹಕ್ಕುಗಳು & ಸ್ಥಾನಮಾನಗಳನ್ನು ಹೊಂದುವುದಲ್ಲದೇ ರಾಜ್ಯಾದ್ಯಂತ
           ಪರವಾನಗಿ ಭೂಮಾಪಕರನ್ನು ಒಂದುಗೂಡಿಸಲು ಸಹಕಾರಿಯಾಗಬೇಕೆಂದು ಕೋರಿದೆ. ಸಂಘಕ್ಕೆ
           ಸದಸ್ಯರಾಗುವುದರ ಲಾಭಗಳು.{" "}
           <span className="">
-            <br /> 1. ಸಂಘದ ಚುನಾವಣೆಗಳಲ್ಲಿ ಮತ ಚಲಾಯಿಸುವ ಹಕ್ಕು ಹೊಂದಬಹುದು <br /> 2.
+            <br /> 1. ಸಂಘದ ಚುನಾವಣೆಯಲ್ಲಿ ಮತ ಚಲಾಯಿಸುವ ಹಕ್ಕು ಹೊಂದಬಹುದು <br /> 2.
             ಸಂಘದ ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ ಉಚಿತ ಪ್ರವೇಶವಿರುತ್ತದೆ.(ಆನ್ಲೈನ್ ಕಲಿಕೆಯ
             ಕಾರ್ಯಕ್ರಮಗಳು, ಕೌಶಲ್ಯಾಭಿವೃಧ್ದಿ ಶಿಬಿರಗಳು, ಇತರೆ) <br />
             3. ರಾಜ್ಯಮಟ್ಟದ ಕ್ರೀಡಾಕೂಟದಲ್ಲಿ ಭಾಗವಹಿಸುವುದು. <br /> 4. ರಾಜ್ಯಮಟ್ಟದ
@@ -420,66 +422,67 @@ function App() {
         </p>
       </div>
 
-      <body class="form-v10" ref={formRef}>
-        <div class="page-content">
-          <div class="form-v10-content">
-            <form class="form-detail" action="#" method="post" id="myform" onSubmit={handleSubmit}>
-              <div class="form-left">
-                <h2>General Infomation</h2>
-                <div class="form-row">
-                  <span class="select-btn">
-                    <i class="zmdi zmdi-chevron-down"></i>
+      <div className="form-v10" ref={formRef}>
+        <div className="page-content">
+          <div className="form-v10-content">
+            <form
+              className="form-detail"
+              action="#"
+              method="post"
+              id="myform"
+              onSubmit={handleSubmit}
+            >
+              <div className="form-left">
+                <h2>General Information</h2>
+                <div className="form-row">
+                  <span className="select-btn">
+                    <i className="zmdi zmdi-chevron-down"></i>
                   </span>
                 </div>
-                <div class="form-group">
-                  <div class="form-row form-row-1">
+                <div className="form-group">
+                  <div className="form-row form-row-1">
                     <label>First Name:</label>
-
                     <input
                       type="text"
                       name="fname"
                       id="first_name"
-                      class="input-text"
+                      className="input-text"
                       placeholder="First Name"
                       required
                     />
                   </div>
-                  <div class="form-row form-row-2">
+                  <div className="form-row form-row-2">
                     <label>Last Name:</label>
-
                     <input
                       type="text"
                       name="lname"
                       id="last_name"
-                      class="input-text"
+                      className="input-text"
                       placeholder="Last Name"
                     />
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <div class="form-row form-row-1">
+                <div className="form-group">
+                  <div className="form-row form-row-1">
                     <label>Aadhar Number:</label>
-
                     <input
                       type="number"
                       name="aadhar_number"
                       id="aadhar_number"
-                      class="input-text"
+                      className="input-text"
                       placeholder="Aadhar Number"
                       required
-                      
                     />
                   </div>
-                  <div class="form-row form-row-2">
-                    <label>Aadhar Copy :</label>
-
+                  <div className="form-row form-row-2">
+                    <label>Aadhar Copy:</label>
                     <input
                       type="file"
                       name="aadhar_copy"
                       id="aadhar_copy"
                       onChange={onFileSelected}
-                      class="input-text"
+                      className="input-text"
                       placeholder=""
                       accept=".jpg, .jpeg, .png, .pdf"
                       required
@@ -488,26 +491,24 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <div class="form-row form-row-1">
+                  <div className="form-row form-row-1">
                     <label>License Number:</label>
-
                     <input
                       type="text"
                       name="license_number"
                       id="license_number"
-                      class="input-text"
+                      className="input-text"
                       placeholder="License Number"
                       required
                     />
                   </div>
-                  <div class="form-row form-row-2">
+                  <div className="form-row form-row-2">
                     <label>Father's Name:</label>
-
                     <input
                       type="text"
                       name="fathers_name"
                       id="fathers_name"
-                      class="input-text"
+                      className="input-text"
                       placeholder="Father's Name"
                       required
                     />
@@ -524,7 +525,7 @@ function App() {
                     required // Make the field required
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <div className="form-row form-row-1">
                     <label htmlFor="blood_group">Blood Group:</label>
                     <select
@@ -547,8 +548,8 @@ function App() {
                     </select>
                   </div>
 
-                  <div class="form-row form-row-2">
-                    <label for="gender">Gender:</label>
+                  <div className="form-row form-row-2">
+                    <label htmlFor="gender">Gender:</label>
                     <select name="gender" id="gender" required>
                       <option value="" disabled selected>
                         Select Gender
@@ -557,8 +558,8 @@ function App() {
                       <option value="female">Female</option>
                       <option value="other">Other</option>
                     </select>
-                    <span class="select-btn">
-                      <i class="zmdi zmdi-chevron-down"></i>
+                    <span className="select-btn">
+                      <i className="zmdi zmdi-chevron-down"></i>
                     </span>
                   </div>
                 </div>
@@ -566,19 +567,18 @@ function App() {
                 <div className="form-group">
                   <div className="form-row form-row-1">
                     <label>Religion:</label>
-
                     <input
                       type="text"
                       name="religion"
                       id="religion"
-                      class="input-text"
+                      className="input-text"
                       placeholder="Religion"
                       required
                     />
                   </div>
 
                   <div className="form-row form-row-2">
-                    <label htmlFor="blood_group">Category:</label>
+                    <label htmlFor="category">Category:</label>
                     <select
                       name="category"
                       id="category"
@@ -598,15 +598,15 @@ function App() {
                       <option value="3B">3B</option>
                       <option value="XMP">XMP</option>
                     </select>
-                    <span class="select-btn">
-                      <i class="zmdi zmdi-chevron-down"></i>
+                    <span className="select-btn">
+                      <i className="zmdi zmdi-chevron-down"></i>
                     </span>
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <div class="form-row form-row-1">
-                    <label for="gender">Marital Status:</label>
+                  <div className="form-row form-row-1">
+                    <label htmlFor="marital">Marital Status:</label>
                     <select name="marital" id="marital" required>
                       <option value="" disabled selected>
                         Marital Status
@@ -614,12 +614,12 @@ function App() {
                       <option value="marital_yes">Yes</option>
                       <option value="marital_no">No</option>
                     </select>
-                    <span class="select-btn">
-                      <i class="zmdi zmdi-chevron-down"></i>
+                    <span className="select-btn">
+                      <i className="zmdi zmdi-chevron-down"></i>
                     </span>
                   </div>
-                  <div class="form-row form-row-2 z-40">
-                    <label for="gender">Joining Date:</label>
+                  <div className="form-row form-row-2 z-40">
+                    <label htmlFor="joining">Joining Date:</label>
                     <DatePicker
                       selected={joining}
                       name="joining"
@@ -629,12 +629,12 @@ function App() {
                     />
                   </div>
                 </div>
-                <div class="form-row form-row-1">
-                  <label htmlFor="">Qualification:</label>
+                <div className="form-row form-row-1">
+                  <label htmlFor="qualification">Qualification:</label>
                   <input
                     type="text"
                     name="qualification"
-                    class="qualification"
+                    className="qualification"
                     id="qualification"
                     placeholder="Qualification"
                     required
@@ -642,7 +642,7 @@ function App() {
                 </div>
               </div>
 
-              <div class="form-right">
+              <div className="form-right">
                 <h2>Other Details</h2>
 
                 {/* District */}
@@ -664,8 +664,8 @@ function App() {
                       </option>
                     ))}
                   </select>
-                  <span class="select-btn">
-                    <i class="zmdi zmdi-chevron-down"></i>
+                  <span className="select-btn">
+                    <i className="zmdi zmdi-chevron-down"></i>
                   </span>
                 </div>
 
@@ -683,46 +683,43 @@ function App() {
                       </option>
                     ))}
                   </select>
-                  <span class="select-btn">
-                    <i class="zmdi zmdi-chevron-down"></i>
+                  <span className="select-btn">
+                    <i className="zmdi zmdi-chevron-down"></i>
                   </span>
                 </div>
                 <div className="form-row">
-                <label for="region">Division</label>
-                <select name="region" id="division" required>
-                  <option value="" disabled selected>
-                    Select division
-                  </option>
-                  <option value="belgavi">Belgavi</option>
-                  <option value="bengaluru">Bengaluru</option>
-                  <option value="mysuru">Mysuru</option>
-                  <option value="kalburgi">Kalburgi</option>
-                </select>
-                <span className="select-btn">
-                  <i className="zmdi zmdi-chevron-down"></i>
-                </span>
-              </div>
+                  <label htmlFor="region">Division</label>
+                  <select name="region" id="division" required>
+                    <option value="" disabled selected>
+                      Select division
+                    </option>
+                    <option value="belgavi">Belgavi</option>
+                    <option value="bengaluru">Bengaluru</option>
+                    <option value="mysuru">Mysuru</option>
+                    <option value="kalburgi">Kalburgi</option>
+                  </select>
+                  <span className="select-btn">
+                    <i className="zmdi zmdi-chevron-down"></i>
+                  </span>
+                </div>
 
-
-
-
-                <div class="form-row">
+                <div className="form-row">
                   <input
                     type="text"
                     name="address"
-                    class="street"
+                    className="street"
                     id="address"
                     placeholder="Permanent address"
                     required
                   />
                 </div>
 
-                <div class="form-group">
-                  <div class="form-row form-row-1">
+                <div className="form-group">
+                  <div className="form-row form-row-1">
                     <input
                       type="text"
                       name="zip"
-                      class="zip"
+                      className="zip"
                       id="zip"
                       placeholder="Zip Code"
                       required
@@ -730,40 +727,40 @@ function App() {
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <div class="form-row form-row-1">
+                <div className="form-group">
+                  <div className="form-row form-row-1">
                     <input
                       type="text"
                       name="code"
-                      class="code"
+                      className="code"
                       id="code"
                       placeholder="+91"
                       required
                     />
                   </div>
-                  <div class="form-row form-row-2">
+                  <div className="form-row form-row-2">
                     <input
                       type="text"
                       name="phone"
-                      class="phone"
+                      className="phone"
                       id="phone"
                       placeholder="Phone Number"
                       required
                     />
                   </div>
                 </div>
-                <div class="form-row">
+                <div className="form-row">
                   <input
                     type="text"
                     name="email"
                     id="your_email"
-                    class="input-text"
+                    className="input-text"
                     required
                     pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
                     placeholder="Your Email"
                   />
                 </div>
-                <div class="form-row form-row-2">
+                <div className="form-row form-row-2">
                   <label>Passport size photo:</label>
 
                   <input
@@ -771,38 +768,44 @@ function App() {
                     name="photo_copy"
                     id="photo_copy"
                     onChange={onFileSelected}
-                    class="input-text"
+                    className="input-text"
                     placeholder=""
                     accept=".jpg, .jpeg, .png, .pdf"
                     required
                   />
                 </div>
-                <div class="form-checkbox">
-                  <label class="container">
+                <div className="form-checkbox">
+                  <label className="container">
                     <p>
                       I do accept the{" "}
-                      <a href="#" class="text">
+                      <a href="#" className="text">
                         Terms and Conditions
                       </a>{" "}
                       of your site.
                     </p>
-                    <input type="checkbox" name="checkbox" />
-                    <span class="checkmark"></span>
+                    <input type="checkbox" name="checkbox" required />
+                    <span className="checkmark"></span>
                   </label>
                 </div>
-                <div class="form-row-last">
+                <div className="form-row-last">
                   <input
                     type="submit"
                     name="register"
-                    class="register"
+                    className="register"
                     value="Register"
+                    disabled={loading}
                   />
                 </div>
+                {loading && (
+                  <div className="loading-indicator text-bgWhite text-xl font-medium text-center p-3">
+                    Submitting, please wait...
+                  </div>
+                )}
               </div>
             </form>
           </div>
         </div>
-      </body>
+      </div>
     </>
   );
 }
