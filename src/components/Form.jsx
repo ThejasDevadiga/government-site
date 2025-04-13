@@ -496,7 +496,7 @@ function App() {
                       id="first_name"
                       className="input-text"
                       placeholder="First Name"
-                      
+                      required
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -520,7 +520,7 @@ function App() {
                       id="aadhar_number"
                       className="input-text"
                       placeholder="Aadhar Number"
-                      
+                      required
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -533,7 +533,7 @@ function App() {
                       className="input-text"
                       placeholder=""
                       accept=".jpg, .jpeg, .png, .pdf"
-                      
+                      required
                     />
                   </div>
                 </div>
@@ -547,7 +547,7 @@ function App() {
                       id="license_number"
                       className="input-text"
                       placeholder="License Number"
-                      
+                      required
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -570,6 +570,7 @@ function App() {
                     name="dob"
                     onChange={(date) => setDOB(date)}
                     dateFormat="dd/MM/yyyy" // Set the date format to day/month/year
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -579,6 +580,7 @@ function App() {
                       name="blood_group"
                       id="blood_group"
                       className="blood_group"
+                      required
                       
                     >
                       <option value="" disabled selected>
@@ -597,7 +599,7 @@ function App() {
 
                   <div className="form-row form-row-2">
                     <label htmlFor="gender">Gender:</label>
-                    <select name="gender" id="gender" >
+                    <select name="gender" id="gender"                       required>
                       <option value="" disabled selected>
                         Select Gender
                       </option>
@@ -630,7 +632,7 @@ function App() {
                       name="category"
                       id="category"
                       className="category"
-                      
+                      required
                     >
                       <option value="" disabled selected>
                         Select Category
@@ -672,7 +674,7 @@ function App() {
                       name="joining"
                       onChange={(date) => setJoining(date)}
                       dateFormat="dd/MM/yyyy"
-                      
+                      required
                     />
                   </div>
                 </div>
@@ -684,7 +686,7 @@ function App() {
                     className="qualification"
                     id="qualification"
                     placeholder="Qualification"
-                    
+                    required
                   />
                 </div>
               </div>
@@ -700,7 +702,7 @@ function App() {
                     id="district"
                     value={selectedDistrict}
                     onChange={handleDistrictChange}
-                    
+                    required
                   >
                     <option value="" disabled>
                       Select District
@@ -720,7 +722,7 @@ function App() {
                   <label htmlFor="taluk" className="text-white">
                     Working Taluk:
                   </label>
-                  <select name="taluk" id="taluk" >
+                  <select name="taluk" id="taluk"                       required >
                     <option value="" disabled>
                       Select Taluk
                     </option>
@@ -757,7 +759,7 @@ function App() {
                     className="street"
                     id="address"
                     placeholder="Permanent address"
-                    
+                    required
                   />
                 </div>
 
@@ -769,7 +771,7 @@ function App() {
                       className="zip"
                       id="zip"
                       placeholder="Zip Code"
-                      
+                      required
                     />
                   </div>
                 </div>
@@ -782,7 +784,7 @@ function App() {
                       className="code"
                       id="code"
                       placeholder="+91"
-                      
+                      required
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -792,7 +794,7 @@ function App() {
                       className="phone"
                       id="phone"
                       placeholder="Phone Number"
-                      
+                      required
                     />
                   </div>
                 </div>
@@ -802,7 +804,7 @@ function App() {
                     name="email"
                     id="your_email"
                     className="input-text"
-                    
+                    required
                     pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
                     placeholder="Your Email"
                   />
@@ -818,7 +820,7 @@ function App() {
                     className="input-text"
                     placeholder=""
                     accept=".jpg, .jpeg, .png, .pdf"
-                    
+                    required
                   />
                 </div>
                 <div className="form-checkbox">
@@ -830,7 +832,7 @@ function App() {
                       </a>{" "}
                       of your site.
                     </p>
-                    <input type="checkbox" name="checkbox"  />
+                    <input type="checkbox" name="checkbox" required/>
                     <span className="checkmark"></span>
                   </label>
                 </div>
