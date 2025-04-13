@@ -5,6 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import membershipFormPDF from "./membershipform.pdf";
 import APIStandards from "../utils/API_standards";
 import communication_service from "../services/communication_service";
+import axios from "axios";
+
 
 function App() {
   const [dob, setDOB] = useState(null);
@@ -13,6 +15,53 @@ function App() {
   const [taluks, setTaluks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+
+
+  React.useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handleRazorpay = () => {
+    setShowModal(false);
+  
+    const options = {
+      key: "rzp_test_IuyW21ROEkWdLW", // ✅ Your test key_id
+      amount: 100, // ₹1000 in paisa
+      currency: "INR",
+      name: "Membership Payment",
+      description: "₹1000 membership fee",
+      handler: function (response) {
+        console.log("✅ Payment success", response);
+        alert("Payment successful! ID: " + response.razorpay_payment_id);
+  
+        // ✅ Now submit form if needed
+        const data = new FormData(document.getElementById("myform"));
+        setLoading(true);
+        uploadData(data); // call your submit function
+      },
+      prefill: {
+        name: "Test User",
+        email: "test@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#4CAF50",
+      },
+    };
+  
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+  
+  
 
   const taluksData = {
     Bagalkote: [
@@ -348,7 +397,7 @@ function App() {
     alert("Membership form has been downloaded.");
   };
 
-  const uploadData = async (data) => {
+   const uploadData = async (data) => {
     try {
       const response = await communication_service.post(
         APIStandards.USER.SET_MEMBER_DATA,
@@ -372,11 +421,10 @@ function App() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setLoading(true);
-    const data = new FormData(event.target);
-    uploadData(data);
+    event.preventDefault(); 
+    setShowModal(true);  // Show the Razorpay modal
   };
+
 
   return (
     <>
@@ -448,7 +496,7 @@ function App() {
                       id="first_name"
                       className="input-text"
                       placeholder="First Name"
-                      required
+                      
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -472,7 +520,7 @@ function App() {
                       id="aadhar_number"
                       className="input-text"
                       placeholder="Aadhar Number"
-                      required
+                      
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -485,7 +533,7 @@ function App() {
                       className="input-text"
                       placeholder=""
                       accept=".jpg, .jpeg, .png, .pdf"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -499,7 +547,7 @@ function App() {
                       id="license_number"
                       className="input-text"
                       placeholder="License Number"
-                      required
+                      
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -510,7 +558,7 @@ function App() {
                       id="fathers_name"
                       className="input-text"
                       placeholder="Father's Name"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -522,7 +570,6 @@ function App() {
                     name="dob"
                     onChange={(date) => setDOB(date)}
                     dateFormat="dd/MM/yyyy" // Set the date format to day/month/year
-                    required // Make the field required
                   />
                 </div>
                 <div className="form-group">
@@ -532,7 +579,7 @@ function App() {
                       name="blood_group"
                       id="blood_group"
                       className="blood_group"
-                      required
+                      
                     >
                       <option value="" disabled selected>
                         Select Blood Group
@@ -550,7 +597,7 @@ function App() {
 
                   <div className="form-row form-row-2">
                     <label htmlFor="gender">Gender:</label>
-                    <select name="gender" id="gender" required>
+                    <select name="gender" id="gender" >
                       <option value="" disabled selected>
                         Select Gender
                       </option>
@@ -573,7 +620,7 @@ function App() {
                       id="religion"
                       className="input-text"
                       placeholder="Religion"
-                      required
+                      
                     />
                   </div>
 
@@ -583,7 +630,7 @@ function App() {
                       name="category"
                       id="category"
                       className="category"
-                      required
+                      
                     >
                       <option value="" disabled selected>
                         Select Category
@@ -607,7 +654,7 @@ function App() {
                 <div className="form-group">
                   <div className="form-row form-row-1">
                     <label htmlFor="marital">Marital Status:</label>
-                    <select name="marital" id="marital" required>
+                    <select name="marital" id="marital" >
                       <option value="" disabled selected>
                         Marital Status
                       </option>
@@ -625,7 +672,7 @@ function App() {
                       name="joining"
                       onChange={(date) => setJoining(date)}
                       dateFormat="dd/MM/yyyy"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -637,7 +684,7 @@ function App() {
                     className="qualification"
                     id="qualification"
                     placeholder="Qualification"
-                    required
+                    
                   />
                 </div>
               </div>
@@ -653,7 +700,7 @@ function App() {
                     id="district"
                     value={selectedDistrict}
                     onChange={handleDistrictChange}
-                    required
+                    
                   >
                     <option value="" disabled>
                       Select District
@@ -673,7 +720,7 @@ function App() {
                   <label htmlFor="taluk" className="text-white">
                     Working Taluk:
                   </label>
-                  <select name="taluk" id="taluk" required>
+                  <select name="taluk" id="taluk" >
                     <option value="" disabled>
                       Select Taluk
                     </option>
@@ -689,7 +736,7 @@ function App() {
                 </div>
                 <div className="form-row">
                   <label htmlFor="region">Division</label>
-                  <select name="region" id="division" required>
+                  <select name="region" id="division" >
                     <option value="" disabled selected>
                       Select division
                     </option>
@@ -710,7 +757,7 @@ function App() {
                     className="street"
                     id="address"
                     placeholder="Permanent address"
-                    required
+                    
                   />
                 </div>
 
@@ -722,7 +769,7 @@ function App() {
                       className="zip"
                       id="zip"
                       placeholder="Zip Code"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -735,7 +782,7 @@ function App() {
                       className="code"
                       id="code"
                       placeholder="+91"
-                      required
+                      
                     />
                   </div>
                   <div className="form-row form-row-2">
@@ -745,7 +792,7 @@ function App() {
                       className="phone"
                       id="phone"
                       placeholder="Phone Number"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -755,7 +802,7 @@ function App() {
                     name="email"
                     id="your_email"
                     className="input-text"
-                    required
+                    
                     pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
                     placeholder="Your Email"
                   />
@@ -771,7 +818,7 @@ function App() {
                     className="input-text"
                     placeholder=""
                     accept=".jpg, .jpeg, .png, .pdf"
-                    required
+                    
                   />
                 </div>
                 <div className="form-checkbox">
@@ -783,7 +830,7 @@ function App() {
                       </a>{" "}
                       of your site.
                     </p>
-                    <input type="checkbox" name="checkbox" required />
+                    <input type="checkbox" name="checkbox"  />
                     <span className="checkmark"></span>
                   </label>
                 </div>
@@ -806,8 +853,42 @@ function App() {
           </div>
         </div>
       </div>
-    </>
+      {showModal && (
+  <div className="fixed inset-0 flex items-center justify-center z-[1000] bg-black bg-opacity-60">
+    <div
+      className="bg-lightyellow p-6 rounded-xl text-center shadow-2xl w-[90%] max-w-md border border-yellow-400"
+      style={{
+        backgroundColor: "#fff9db", // fallback yellow in case Tailwind fails
+        opacity: 1,
+      }}
+    >
+      <h2 className="text-2xl font-bold mb-4 text-green-700">Confirm Payment</h2>
+      <p className="mb-6 text-gray-900 text-lg">
+        Do you want to make a payment of <span className="font-semibold text-black">₹1000</span> for membership?
+      </p>
+      <div className="flex justify-between px-4">
+        <button
+          onClick={() => setShowModal(false)}
+          className="bg-gray-300 text-black font-medium px-6 py-2 rounded hover:bg-gray-400 transition"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleRazorpay}
+          className="bg-green-600 text-white font-medium px-6 py-2 rounded hover:bg-green-700 transition"
+        >
+          Pay
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+  </>
   );
 }
+
 
 export default App;

@@ -30,7 +30,7 @@ function Footer() {
               </a> */}
             </div>
             <div className="text-center">
-              <span class="text-sm text-gray-500 text-center dark:text-gray-400">
+              {/* <span class="text-sm text-gray-500 text-center dark:text-gray-400">
                 © {getYear()}{" "}
                 <a
                   href="https://deltanlobo.vercel.app"
@@ -39,7 +39,15 @@ function Footer() {
                   Deltan Lobo
                 </a>
                 . All Rights Reserved.
-              </span>
+              </span> */}
+              <div>
+                <Link
+                  to="/privacy"
+                  className="hover:text-lightyellow text-yellow"
+                >
+                  Privacy Policy
+                </Link>
+              </div>
             </div>
           </div>
         </footer>

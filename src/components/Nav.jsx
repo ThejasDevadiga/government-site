@@ -31,7 +31,6 @@ export default function Nav() {
     {name: "ಗ್ಯಾಲರಿ", href: "/gallery",current: false },
     {name:"ಸದಸ್ಯತ್ವ", href: "/form", current: false },
     { name: "ಸಂಪರ್ಕಿಸಿ", href: "/contact", current: false },
-    { name: "Privacy Policy", href: "/privacy", current: false },
   ]);
 
   const handleClick = (index, href) => {
