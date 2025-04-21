@@ -33,8 +33,8 @@ function App() {
     setShowModal(false);
   
     const options = {
-      key: "rzp_test_IuyW21ROEkWdLW", // ✅ Your test key_id
-      amount: 100, // ₹1000 in paisa
+      key: "rzp_live_AimUYoUeDOtVsB", // ✅ Your test key_id
+      amount: 1000, // ₹1000 in paisa
       currency: "INR",
       name: "Membership Payment",
       description: "₹1000 membership fee",
@@ -47,10 +47,17 @@ function App() {
         setLoading(true);
         uploadData(data); // call your submit function
       },
+      notes: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        registration: formData.registration,
+      },
       prefill: {
-        name: "Test User",
-        email: "test@example.com",
-        contact: "9999999999",
+        name: formData.name,
+        email: formData.email,
+        contact: formData.phone,
       },
       theme: {
         color: "#4CAF50",
