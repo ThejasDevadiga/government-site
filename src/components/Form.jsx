@@ -32,33 +32,48 @@ function App() {
   const handleRazorpay = () => {
     setShowModal(false);
   
+    // 🔁 Grab form field values manually
+    const name = document.getElementById("first_name").value;
+    const email = document.getElementById("email")?.value || "";
+    const phone = document.getElementById("phone")?.value || "";
+    const address = document.getElementById("address")?.value || "";
+    const registration = document.getElementById("registration")?.value || "";
+  
+    const formData = {
+      name,
+      email,
+      phone,
+      address,
+      registration,
+    };
+  
     const options = {
-      key: "rzp_live_AimUYoUeDOtVsB", // ✅ Your test key_id
-      amount: 1000, // ₹1000 in paisa
+      key: "rzp_live_AimUYoUeDOtVsB",
+      amount: 2000, // ₹1000 in paisa
       currency: "INR",
       name: "Membership Payment",
       description: "₹1000 membership fee",
+  
       handler: function (response) {
         console.log("✅ Payment success", response);
         alert("Payment successful! ID: " + response.razorpay_payment_id);
   
-        // ✅ Now submit form if needed
+        // ✅ Submit the form after payment
         const data = new FormData(document.getElementById("myform"));
         setLoading(true);
-        uploadData(data); // call your submit function
+        uploadData(data);
       },
+  
       notes: {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        address: formData.address,
-        registration: formData.registration,
+        ...formData,
       },
+  
       prefill: {
         name: formData.name,
         email: formData.email,
         contact: formData.phone,
       },
+  
       theme: {
         color: "#4CAF50",
       },
@@ -67,6 +82,7 @@ function App() {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+  
   
   
 
